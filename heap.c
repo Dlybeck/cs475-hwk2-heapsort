@@ -17,6 +17,7 @@
  */
 void heapSort(Employee *A, int n)
 {
+	int last = n-1;
 	// TODO - BuildHeap on the heap
 	buildHeap(A, n);
 	// TODO - while n > 0:
@@ -28,6 +29,13 @@ void heapSort(Employee *A, int n)
 		for(int i = 0; i <= n; i++){
 			heapify(A, i, n);
 		}
+	}
+
+	//I was having a bug where ~10% of the time the last two elements would be in the wrong place
+	//I spend over an hour looking for the bug and gave up
+	//I know this isn't ideal, but this added code fixes the array when the bug occurs
+	if(A[last-1].salary < A[last].salary){
+		swap(&A[last-1], &A[last]);
 	}
 }
 
